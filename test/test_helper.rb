@@ -17,4 +17,8 @@ class ActiveSupport::TestCase
   # fixtures :all
 
   # Add more helper methods to be used by all tests here...
+
+  def active_user
+    User.find_by(activated: true)
+  end
 end
