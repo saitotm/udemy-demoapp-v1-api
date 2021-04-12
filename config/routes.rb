@@ -5,6 +5,10 @@ Rails.application.routes.draw do
       resources :users, only:[:index] do
         get :current_user, action: :show, on: :collection
       end
+
+      resources :user_token, only: [:create] do
+        delete :destroy, on: :collection
+      end
     end
   end
 end
