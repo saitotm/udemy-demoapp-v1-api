@@ -1,7 +1,7 @@
 class Api::V1::UserTokenController < ApplicationController
     rescue_from UserAuth.not_found_exception_class, with: :not_found
     before_action :delete_cookie
-    before_action :authenticate, only [:create]
+    before_action :authenticate, only: [:create]
 
     def create
         cookies[token_access_key] = cookie_token
@@ -30,9 +30,9 @@ class Api::V1::UserTokenController < ApplicationController
         
         def cookie_token
             {
-                value: auth.token
-                expires: Time.at(auth.payload[:exp])
-                secure: Rails.env.production?
+                value: auth.token,
+                expires: Time.at(auth.payload[:exp]),
+                secure: Rails.env.production?,
                 http_only: true
             }
         end
